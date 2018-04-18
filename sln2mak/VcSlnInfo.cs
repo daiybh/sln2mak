@@ -110,18 +110,20 @@ namespace sln2mak
                 matchProjInfo = Parser.ProjectRegex.Match(line);
                 if (matchProjInfo.Success)
                 {
+                    //replace slashes for matching Linux OS
+                    vcprojPath = matchProjInfo.Groups[3].Value.Replace("\\", "/");
+                    if (!vcprojPath.EndsWith(".vcxproj")) continue;
+
                     //Key = Guid number, Value = ProjectName
                     m_ProjGuidName.Add(matchProjInfo.Groups[4].Value, matchProjInfo.Groups[2].Value);
 
-                    //replace slashes for matching Linux OS
-                    vcprojPath = matchProjInfo.Groups[3].Value.Replace("\\", "/");
                     //Key = ProjectName , Value = ProjectFullPath
                     m_ProjNamePath.Add(matchProjInfo.Groups[2].Value, vcprojPath);
 
                     //replace .vcproj extention to .mak for makefile name
                     makeFileName = vcprojPath;
 
-                    makeFileName = makeFileName.Replace(".vcproj", ".mak");
+                    makeFileName = makeFileName.Replace(".vcxproj", ".mak");
                     // If we run with full path to .sln file...
                     if (!(Path.GetDirectoryName(m_SlnFullPath).Equals(""))) 
                     {
