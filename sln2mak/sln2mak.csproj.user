@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>F:\Maria\CodeProject\myCodeProject\Test2\Test2.sln</StartArguments>
+  </PropertyGroup>
+</Project>
